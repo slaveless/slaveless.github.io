@@ -32,7 +32,8 @@
             <ul class="items">
                 <li>
                     <strong>Aversion to Generics</strong> - Instead of using <a href="https://docs.oracle.com/javase/specs/jls/se8/html/jls-8.html#jls-8.4.4" style="text-decoration: underline;">Generic Methods</a>, the author decides to accept raw objects and check their types at runtime. This turns a statically typed language into Russian roulette.
-
+                </li>
+            </ul>
                     <div class="code-block">private void interlaceTexture(int width, int height, Object srcArray, Object dstArray, boolean reverseIndex) {
     if (srcArray.getClass() != dstArray.getClass()) {
         throw new IllegalArgumentException("srcArray and dstArray must be of type " + srcArray.getClass());
@@ -44,8 +45,6 @@
                         Using <span class="code-snippet">MethodHandles</span> to access array elements in this context is like shooting sparrows with a cannon while blindfolded.
                     </p>
                     <a class="source-link" href="https://github.com/danila-schelkov/supercell-swf/blob/master/src/main/java/dev/donutquine/swf/textures/SWFTexture.java#L81">src/main/java/dev/donutquine/swf/textures/SWFTexture.java:81</a>
-                </li>
-            </ul>
 
             <h3>ToString() or "Death by Concatenation"</h3>
             <p>
