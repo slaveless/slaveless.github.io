@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slaveless | slaves | danila schelkov</title>
+    <link rel="stylesheet" href="../../styles.css" />
+</head>
+<body>
+
+    <div id="header">
+        <div>
+            <strong>slaveless | slaves</strong><span class="subtitle">danila schelkov</span>
+        </div>
+        <div style="font-size: 11px;">
+            <a href="../../index.html">home</a>
+        </div>
+    </div>
+
+    <div id="container">
+        <div id="content">
+            <h3>The Philosophy of Chaos</h3>
+            <p>
+                This section is dedicated to analyzing programming practices from the <a href="https://github.com/danila-schelkov/supercell-swf" style="text-decoration: underline;">supercell-swf</a> repository. Here are collected examples of how to turn Java (which is already no gift) into an instrument of torture for anyone who attempts to read this code.
+            </p>
+
+            <h3>Type Safety? Never Heard of It</h3>
+            <p>
+                Why use Java's type system when you can accept <span class="code-snippet">Object</span> and hope for the best?
+            </p>
+
+            <ul class="items">
+                <li>
+                    <strong>Aversion to Generics</strong> - Instead of using <a href="https://docs.oracle.com/javase/specs/jls/se8/html/jls-8.html#jls-8.4.4" style="text-decoration: underline;">Generic Methods</a>, the author decides to accept raw objects and check their types at runtime. This turns a statically typed language into Russian roulette.
+
+                    <div class="code-block">private void interlaceTexture(int width, int height, Object srcArray, Object dstArray, boolean reverseIndex) {
+    if (srcArray.getClass() != dstArray.getClass()) {
+        throw new IllegalArgumentException("srcArray and dstArray must be of type " + srcArray.getClass());
+    }
+    // Why do we need a typed array when we have VarHandle?
+    VarHandle arrayElementHandle = MethodHandles.arrayElementVarHandle(dstArray.getClass());</div>
+
+                    <p>
+                        Using <span class="code-snippet">MethodHandles</span> to access array elements in this context is like shooting sparrows with a cannon while blindfolded.
+                    </p>
+                    <a class="source-link" href="https://github.com/danila-schelkov/supercell-swf/blob/master/src/main/java/dev/donutquine/swf/textures/SWFTexture.java#L81">src/main/java/dev/donutquine/swf/textures/SWFTexture.java:81</a>
+                </li>
+            </ul>
+
+            <h3>ToString() or "Death by Concatenation"</h3>
+            <p>
+                If you pay for every method call, that's the only way to explain the complete disregard for <span class="code-snippet">String.format()</span>.
+            </p>
+
+            <ul class="items">
+                <li>
+                    <strong>Concatenation Hell</strong> - It's not just about bad aesthetics. Every single <span class="code-snippet">+</span> operator creates a new <span class="code-snippet">String</span> object. This floods the heap with useless intermediate objects and forces the Garbage Collector to work overtime for no reason.
+                </li>
+            </ul>
+
+            <div class="code-block">public String toString() {
+    return "MovieClipOriginal{" +
+           "tag=" + tag +
+           ", id=" + id +
+           ", exportName='" + exportName + '\'' +
+           ", fps=" + fps +
+           ", customPropertyBoolean=" + customPropertyBoolean +
+           // ... 10 more lines of pain ...
+           ", children=" + Arrays.toString(timelineChildren) +
+           '}';
+}</div>
+
+            <p>
+                This inefficient pattern is pervasive throughout the codebase. Instead of the elegant <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#format-java.lang.String-java.lang.Object...-" style="text-decoration: underline;">String.format</a>, we have a spaghetti of pluses and quotes.
+            </p>
+
+            <a class="source-link" href="https://github.com/danila-schelkov/supercell-swf/blob/6737f413006296894d1e3919d6fb15accc490a8c/src/main/java/dev/donutquine/math/Point.java#L39">src/main/java/dev/donutquine/math/Point.java:39</a>
+            <a class="source-link" href="https://github.com/danila-schelkov/supercell-swf/blob/6737f413006296894d1e3919d6fb15accc490a8c/src/main/java/dev/donutquine/math/Rect.java#L159">src/main/java/dev/donutquine/math/Rect.java:159</a>
+            <a class="source-link" href="https://github.com/danila-schelkov/supercell-swf/blob/6737f413006296894d1e3919d6fb15accc490a8c/src/main/java/dev/donutquine/swf/shapes/ShapePoint.java#L85">src/main/java/dev/donutquine/swf/shapes/ShapePoint.java:85</a>
+            <a class="source-link" href="https://github.com/danila-schelkov/supercell-swf/blob/6737f413006296894d1e3919d6fb15accc490a8c/src/main/java/dev/donutquine/swf/Matrix2x3.java#L247">src/main/java/dev/donutquine/swf/Matrix2x3.java:247</a>
+            <a class="source-link" href="https://github.com/danila-schelkov/supercell-swf/blob/6737f413006296894d1e3919d6fb15accc490a8c/src/main/java/dev/donutquine/swf/movieclips/MovieClipModifierOriginal.java#L47">src/main/java/dev/donutquine/swf/movieclips/MovieClipModifierOriginal.java:47</a>
+
+            <h3>Verdict</h3>
+            <p>
+                Does the code work? Maybe. But at what cost? At the cost of the sanity of anyone who tries to maintain it.
+            </p>
+
+        </div>
+    </div>
+
+</body>
+</html>

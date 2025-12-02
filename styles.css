@@ -1,0 +1,138 @@
+body {
+    background-color: #000;
+    color: #ccc;
+    font-family: sans-serif;
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+    line-height: 1.4;
+}
+
+a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: #333;
+}
+
+#header {
+    background-color: #aa1111;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    border-bottom: 1px solid #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#header a {
+    color: #fff;
+    margin-right: 15px;
+}
+
+#header a:hover {
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.subtitle {
+    font-style: italic;
+    color: #ffcccc;
+    font-weight: normal;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+#container {
+    display: block;
+    min-height: 100vh;
+}
+
+#content {
+    padding: 20px;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+h1,
+h2,
+h3 {
+    color: #eee;
+    margin-top: 0;
+}
+
+h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+    margin-top: 20px;
+}
+
+p {
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+ul.items {
+    list-style-type: square;
+    padding-left: 20px;
+}
+
+ul.items li {
+    margin-bottom: 15px;
+}
+
+strong {
+    color: #fff;
+}
+
+.code-snippet {
+    font-family: monospace;
+    background-color: #222;
+    padding: 2px 4px;
+    font-size: 12px;
+    color: #f0f0f0;
+    border: 1px solid #444;
+}
+
+.code-block {
+    font-family: monospace;
+    background-color: #1a1a1a;
+    padding: 10px;
+    font-size: 12px;
+    color: #ccc;
+    border-left: 3px solid #aa1111;
+    white-space: pre-wrap;
+    margin-bottom: 15px;
+    overflow-x: auto;
+}
+
+.highlight {
+    color: #aa1111;
+    font-weight: bold;
+}
+
+.ref-link {
+    font-size: 11px;
+    color: #666;
+}
+
+.source-link {
+    display: block;
+    color: #4fa3ff;
+    font-family: monospace;
+    font-size: 11px;
+    text-decoration: none;
+    margin-bottom: 2px; 
+    padding-left: 20px; 
+}
+
+.source-link:hover {
+    text-decoration: underline;
+    color: #fff;
+}
